@@ -61,9 +61,9 @@ def render_manim_scene(dosya_adi: str, sinif_adi: str, konu_slug: str) -> dict:
     ]
 
     try:
-        sonuc = subprocess.run(komut, capture_output=True, text=True, timeout=180)
+        sonuc = subprocess.run(komut, capture_output=True, text=True, timeout=600)
     except subprocess.TimeoutExpired:
-        return {"basarili": False, "hata": "Render 180 saniyeyi aştı - sahne çok karmaşık olabilir"}
+        return {"basarili": False, "hata": "Render 600 saniyeyi aştı - sahne çok karmaşık olabilir"}
 
     if sonuc.returncode != 0:
         # Son 2000 karakter yeterli - tüm Manim logunu Sanat Yönetmeni'ne
