@@ -12,6 +12,9 @@ otomatik değiştirmez.
   aracı hallediyor. Sahne kodu sadece nesneleri dikey alana göre
   yerleştirir (geniş yatay kompozisyonlardan kaçının).
 - Süre: senaryodaki `hedef_sure_sn` neyse (40-50 sn aralığı).
+- Ana kompozisyon çerçevenin ortasına, dikeyde en az %70, yatayda en
+  az %60 alan kullanacak şekilde ölçeklenir — dar bir şeride sıkışmaz,
+  kenarlarda büyük boşluk bırakmaz.
 
 ## Boyut kararı: 2D (sabit)
 
@@ -40,6 +43,10 @@ MAVI = "#4FC3F7"
 METIN = "#F5F5F5"
 ```
 
+Düğüm/uç harfi etiketleri (A, B gibi), bağlı olduğu telin rengiyle
+eşleşir — üst hat turuncuysa üst düğüm harfi turuncu, alt hat
+maviyse alt düğüm harfi mavi.
+
 ## Glow efekti (referans görseldeki parlama)
 
 Gerçek bloom shader yok — iç içe, giderek saydamlaşan daire yığınıyla
@@ -49,14 +56,24 @@ def glow(merkez, renk, taban_yaricap=0.12):
     return VGroup(*[
         Circle(radius=taban_yaricap * f, stroke_width=0,
                fill_color=renk, fill_opacity=o).move_to(merkez)
-        for f, o in [(3.5, 0.05), (2.5, 0.12), (1.6, 0.25), (1.0, 0.6)]
+        for f, o in [(3.5, 0.04), (2.5, 0.08), (1.6, 0.18), (1.0, 0.45)]
     ])
 ```
 Düğüm noktalarında, dirençlerin üstünde bu fonksiyonu kullanın.
 
+Opacity değerleri `[0.05, 0.12, 0.25, 0.6]`'dan `[0.04, 0.08, 0.18,
+0.45]`'e düşürülmüştür — genel parlaklık azalır ama düğüm noktaları
+hâlâ görünür kalır.
+
 `glow()` fonksiyonu yalnızca devre düğüm noktaları ve bileşenler
 içindir; metin, formül veya sayı etiketlerine glow uygulanmaz,
 okunabilirliği bozar.
+
+## Bileşen sembolleri
+
+Voltaj kaynağı (pil) sembolündeki çizgiler ince ve zarif olmalı,
+stroke_width devre teline göre daha kalın olmamalı, gereksiz
+kabalık istenmiyor.
 
 ## Akım animasyonu
 
@@ -69,6 +86,9 @@ yol, düz bir kısayol çizgisi değil, bileşenin gerçek geometrisi
 olmalı; bir direnç zigzag çiziliyorsa akım noktası da o zigzag'ı
 takip etmeli.
 
+Dot geçişleri varsayılan hızdan %30 daha hızlı olsun (run_time
+değerlerini buna göre düşür), akış gözle daha net takip edilsin.
+
 ## Tipografi
 
 - Başlık (varsa): üstte, `Write` animasyonuyla, `METIN` rengi.
@@ -76,3 +96,6 @@ takip etmeli.
   (örn. `V` turuncu, `I` yeşil, `R` mavi — Ohm örneğinde olduğu gibi).
 - Gövde metni yok — bu videolarda anlatım tamamen seslendirmede,
   ekranda sadece formül/şema/sayı olur.
+- Aynı denklemin iki farklı yönden yazılmış hali (I1+I2=I3 ve
+  I3=I1+I2 gibi) aynı sahnede aynı anda ekranda birlikte tutulmaz —
+  biri FadeOut olmadan diğeri gelmez.

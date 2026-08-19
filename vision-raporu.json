@@ -1,14 +1,15 @@
 {
   "gecti": true,
-  "puan": 88,
+  "puan": 94,
   "bulgular": [
-    "kare_0->kare_1->kare_2 arasında akım Dot'unun pozisyonu değişiyor (köşelerden alt tel ortasına, oradan direnç zigzag'ının içine) - önceki turdaki 'noktalar sabit/duragan' tespiti hatalıydı, geri çekiliyor",
-    "kare_2 ve kare_3'te nokta aynı pozisyonda (direnç zigzag ortası) görünüyor ancak bu, senaryodaki [00:27-00:34] 'akış yavaşlıyor, Dot sayısı 3'e düşüyor, aralar açılıyor' talimatıyla tutarlı - tek kare çakışması donmuş animasyon kanıtı sayılmıyor",
-    "Format dikey 9:16, kırpılma yok",
-    "Renk paleti stil rehberine uygun: arka plan #0B0B0F'e yakın, turuncu/yeşil/mavi aksanlar doğru tonlarda",
-    "kare_3'te V=10V, R=5Ω, I=2A satırları net, taşma/çakışma yok, gorsel_tarif segment 6 ile eşleşiyor",
-    "3D öğe sızıntısı yok, 2D kararına tam uyum",
-    "Okunabilirlik ve kontrast yeterli"
+    "kare_1 ve kare_2'de 'I1 + I2 = I3' ve 'I3 = I1 + I2' formüllerinde yalnızca I1/I2/I3 turuncu, '+' ve '=' işaretleri METIN renginde (#F5F5F5) - önceki hata düzeltilmiş",
+    "kare_3'te 'ΣI giren = ΣI çıkan' formülünde ΣI_giren turuncu, ΣI_çıkan mavi, '=' METIN renginde - tarife uygun",
+    "Dört karede de dikey 9:16 kompozisyon korunmuş, arka plan #0B0B0F'e yakın",
+    "Node A/turuncu ve Node B/mavi bus çizgileri, glow noktaları ve harf etiketleri (glow'suz) tarife uygun",
+    "Dal geometrisi doğru: sol/sağ dallarda R1-10V ve R2-20V pil, orta dalda yalnızca R3 (pil yok)",
+    "I1/I2/I3 dal etiketlerine glow uygulanmamış, akım Dot'larına turuncu glow uygulanmış - stil rehberine uygun",
+    "Metin/formül taşması, çakışma veya 3D sızıntısı gözlenmedi",
+    "Kozmetik not (kritik değil): kare_0/1/2'de devre ekranın üst-orta bölgesinde küçük kalıyor, alt yarıda geniş boş alan var; ancak bu tarifte tanımlı final-segment ölçekleme öncesi beklenen bir durum"
   ],
   "oneri": ""
 }
