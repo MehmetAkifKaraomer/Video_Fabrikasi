@@ -41,6 +41,10 @@ otomatik yüklenir, elle hatırlatılmasına gerek yok.
   kendi görev dosyasını okur).
 - Tüm denetleyiciler aynı JSON şemasını kullanır:
   `{"gecti": bool, "puan": int, "bulgular": [string], "oneri": string}`.
+- Şef, alt ajanların döndürdüğü JSON kararlarını asla kendi
+  yorumuyla değiştirmez, yalnızca olduğu gibi dosyaya yazar. Bir
+  kararla anlaşmıyorsa, o ajanı ek bağlamla tekrar çağırır, kararı
+  kendisi değiştirmez.
 
 ## Kapsam dışı (bilinçli karar, şimdilik yapılmayacak)
 - Günlük otomatik video üretimi yok.

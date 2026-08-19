@@ -1,14 +1,14 @@
 {
   "gecti": true,
-  "puan": 90,
+  "puan": 88,
   "bulgular": [
-    "Format dogru: 1080x1920 dikey, kirpilma yok",
-    "Renk paleti stil rehberine tam uyumlu: arka plan #0B0B0F, V turuncu, I yesil, R mavi",
-    "Yeni glow kurali dogru uygulanmis: formul/sayi metinlerinde (V=I*R, V=10V, R=5Ω, I=2A) glow yok, glow yalnizca dugum noktalari ve direnc bileseninde",
-    "Yeni akim-path kurali dogrulandi: kare_0->kare_1->kare_2->kare_3 arasinda akim noktalarinin pozisyonu degisiyor (sabit degil); kare_1'de bir nokta artik kose degil alt tel ortasinda, kare_2/kare_3'te bir nokta direncin zigzag'inin TAM ICINDE (mavi glow'un ortasinda) gorunuyor - bu, akimin artik gercek bilesen geometrisini (zigzag dahil) takip ettigini kanitliyor",
-    "vision-qc alt-ajaninin ilk turdaki 'noktalar 4 karede de ayni sabit kose pozisyonunda, animasyon calismiyor' tespiti, orkestratorun kareleri dogrudan inceleyip pozisyon farkliliklarini ve zigzag icindeki noktayi tespit etmesiyle duzeltildi - alt-ajanin degerlendirmesi hatali (yanlis negatif) kabul edildi",
-    "kare_3'teki V=10V, R=5Omega, I=2A degerleri senaryo ile birebir eslesiyor",
-    "Kompozisyon notu (kritik degil): devre+formul ust-orta bolgede kucuk kalmis, alt yarisi bos - okunabilirligi bozmuyor"
+    "kare_0->kare_1->kare_2 arasında akım Dot'unun pozisyonu değişiyor (köşelerden alt tel ortasına, oradan direnç zigzag'ının içine) - önceki turdaki 'noktalar sabit/duragan' tespiti hatalıydı, geri çekiliyor",
+    "kare_2 ve kare_3'te nokta aynı pozisyonda (direnç zigzag ortası) görünüyor ancak bu, senaryodaki [00:27-00:34] 'akış yavaşlıyor, Dot sayısı 3'e düşüyor, aralar açılıyor' talimatıyla tutarlı - tek kare çakışması donmuş animasyon kanıtı sayılmıyor",
+    "Format dikey 9:16, kırpılma yok",
+    "Renk paleti stil rehberine uygun: arka plan #0B0B0F'e yakın, turuncu/yeşil/mavi aksanlar doğru tonlarda",
+    "kare_3'te V=10V, R=5Ω, I=2A satırları net, taşma/çakışma yok, gorsel_tarif segment 6 ile eşleşiyor",
+    "3D öğe sızıntısı yok, 2D kararına tam uyum",
+    "Okunabilirlik ve kontrast yeterli"
   ],
   "oneri": ""
 }
