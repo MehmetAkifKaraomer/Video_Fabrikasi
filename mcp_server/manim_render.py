@@ -10,6 +10,7 @@ elle çalıştırmanıza gerek yok.
 
 import subprocess
 import pathlib
+import shutil
 from mcp.server.fastmcp import FastMCP
 
 mcp = FastMCP("manim-render")
@@ -25,7 +26,10 @@ def _video_suresi(video_yolu: pathlib.Path) -> float:
         "-of", "default=noprint_wrappers=1:nokey=1", str(video_yolu),
     ]
     try:
-        sonuc = subprocess.run(komut, capture_output=True, text=True, timeout=15)
+        sonuc = subprocess.run(
+            komut, capture_output=True, text=True, timeout=15,
+            stdin=subprocess.DEVNULL,
+        )
         return float(sonuc.stdout.strip())
     except (ValueError, subprocess.TimeoutExpired):
         return 45.0  # güvenli varsayılan, kare çıkarımı yine de çalışır
@@ -50,6 +54,8 @@ def render_manim_scene(dosya_adi: str, sinif_adi: str, konu_slug: str) -> dict:
         return {"basarili": False, "hata": f"{sahne_yolu} bulunamadı"}
 
     video_cikti_klasoru = CIKTI / konu_slug
+    if video_cikti_klasoru.exists():
+        shutil.rmtree(video_cikti_klasoru)
     video_cikti_klasoru.mkdir(parents=True, exist_ok=True)
 
     komut = [
@@ -61,7 +67,10 @@ def render_manim_scene(dosya_adi: str, sinif_adi: str, konu_slug: str) -> dict:
     ]
 
     try:
-        sonuc = subprocess.run(komut, capture_output=True, text=True, timeout=600)
+        sonuc = subprocess.run(
+            komut, capture_output=True, text=True, timeout=600,
+            stdin=subprocess.DEVNULL,
+        )
     except subprocess.TimeoutExpired:
         return {"basarili": False, "hata": "Render 600 saniyeyi aştı - sahne çok karmaşık olabilir"}
 
@@ -88,7 +97,10 @@ def render_manim_scene(dosya_adi: str, sinif_adi: str, konu_slug: str) -> dict:
             "-frames:v", "1", str(kare_yolu),
         ]
         try:
-            subprocess.run(ffmpeg_komut, capture_output=True, timeout=30)
+            subprocess.run(
+                ffmpeg_komut, capture_output=True, timeout=30,
+                stdin=subprocess.DEVNULL,
+            )
         except subprocess.TimeoutExpired:
             continue
         if kare_yolu.exists():
