@@ -54,11 +54,20 @@ def glow(merkez, renk, taban_yaricap=0.12):
 ```
 Düğüm noktalarında, dirençlerin üstünde bu fonksiyonu kullanın.
 
+`glow()` fonksiyonu yalnızca devre düğüm noktaları ve bileşenler
+içindir; metin, formül veya sayı etiketlerine glow uygulanmaz,
+okunabilirliği bozar.
+
 ## Akım animasyonu
 
 Referans görseldeki "noktalı akış" için `Dot` nesnelerini bir
 `Line`/path üzerinde `MoveAlongPath` ile hareket ettirin; tek seferlik
 değil, `always_redraw` veya döngüsel `Succession` ile sürekli aksın.
+
+`MoveAlongPath`'e (veya akım noktalarının izlediği path'e) verilen
+yol, düz bir kısayol çizgisi değil, bileşenin gerçek geometrisi
+olmalı; bir direnç zigzag çiziliyorsa akım noktası da o zigzag'ı
+takip etmeli.
 
 ## Tipografi
 
