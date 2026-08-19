@@ -16,13 +16,18 @@ from mcp.server.fastmcp import FastMCP
 mcp = FastMCP("manim-render")
 
 PROJE_KOKU = pathlib.Path(__file__).resolve().parent.parent
+
+MANIM_YOLU = shutil.which("manim") or r"C:\Users\Akif\AppData\Local\Programs\Python\Python313\Scripts\manim.exe"
+FFMPEG_YOLU = shutil.which("ffmpeg") or r"C:\Users\Akif\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-9.0-full_build\bin\ffmpeg.exe"
+FFPROBE_YOLU = shutil.which("ffprobe") or r"C:\Users\Akif\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-9.0-full_build\bin\ffprobe.exe"
+
 SAHNELER = PROJE_KOKU / "scenes"
 CIKTI = PROJE_KOKU / "output"
 
 
 def _video_suresi(video_yolu: pathlib.Path) -> float:
     komut = [
-        "ffprobe", "-v", "error", "-show_entries", "format=duration",
+        FFPROBE_YOLU, "-v", "error", "-show_entries", "format=duration",
         "-of", "default=noprint_wrappers=1:nokey=1", str(video_yolu),
     ]
     try:
@@ -59,7 +64,7 @@ def render_manim_scene(dosya_adi: str, sinif_adi: str, konu_slug: str) -> dict:
     video_cikti_klasoru.mkdir(parents=True, exist_ok=True)
 
     komut = [
-        "manim", "render",
+        MANIM_YOLU, "render",
         "-r", "1080,1920",
         "--format", "mp4",
         "--media_dir", str(video_cikti_klasoru),
@@ -93,7 +98,7 @@ def render_manim_scene(dosya_adi: str, sinif_adi: str, konu_slug: str) -> dict:
         zaman = round(sure * oran, 2)
         kare_yolu = kareler_klasoru / f"kare_{i}.png"
         ffmpeg_komut = [
-            "ffmpeg", "-y", "-ss", str(zaman), "-i", str(video_yolu),
+            FFMPEG_YOLU, "-y", "-ss", str(zaman), "-i", str(video_yolu),
             "-frames:v", "1", str(kare_yolu),
         ]
         try:
