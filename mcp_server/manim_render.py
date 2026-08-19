@@ -89,7 +89,7 @@ def render_manim_scene(dosya_adi: str, sinif_adi: str, konu_slug: str) -> dict:
     sure = _video_suresi(video_yolu)
 
     kare_yollari = []
-    for i, oran in enumerate([0.25, 0.5, 0.75]):
+    for i, oran in enumerate([0.35, 0.55, 0.75, 0.9]):
         zaman = round(sure * oran, 2)
         kare_yolu = kareler_klasoru / f"kare_{i}.png"
         ffmpeg_komut = [

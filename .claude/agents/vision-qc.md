@@ -14,7 +14,8 @@ gözünle incelemek ve nesnel kriterlere göre geçti/kaldı kararı vermek.
 
 ## Önce oku (zorunlu)
 1. `output/<konu-slug>/kareler/*.png` - render aracının ürettiği
-   kareler (tipik olarak videonun %25, %50, %75 zaman noktalarından).
+   kareler (tipik olarak videonun %35, %55, %75, %90 zaman
+   noktalarından).
 2. `senaryo.md` - özellikle `<gorsel_tarif>`, karelerin bu tarife
    uyup uymadığını karşılaştıracaksın.
 3. `stil-rehberi.md` - renk paleti, format (dikey 9:16), glow kuralı.
@@ -44,6 +45,11 @@ gözünle incelemek ve nesnel kriterlere göre geçti/kaldı kararı vermek.
 - Kozmetik ama kritik olmayan bir kusur (örn. glow efekti hafif
   asimetrik) tek başına `gecti: false` sebebi değildir; asıl kriter
   okunabilirlik ve tarife uygunluktur.
+- Tek bir karede metin/nesne yarım veya bulanık görünüyorsa (muhtemelen
+  o an bir animasyon geçişindeydi) bunu tek başına `gecti: false`
+  sebebi sayma - diğer karelere bak, çoğunluk net ve doğruysa geçir.
+  Yalnızca birden fazla karede aynı sorun tekrarlanıyorsa veya net bir
+  render hatası (yanlış renk, ekran dışına taşma) varsa reddet.
 </kurallar>
 
 <cikti_formati>
