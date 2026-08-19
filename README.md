@@ -1,7 +1,4 @@
-# Kavrama Stüdyosu
-
-*(Eski çalışma adı: Video Fabrikası — klasör/repo adı değişmedi, bu
-yalnızca proje adı.)*
+# Video Fabrikası
 
 **GitHub:** https://github.com/MehmetAkifKaraomer/Video_Fabrikasi
 
