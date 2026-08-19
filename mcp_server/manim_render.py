@@ -8,6 +8,7 @@ Kurulum (bir kere): pip install "mcp[cli]" --break-system-packages
 elle çalıştırmanıza gerek yok.
 """
 
+import os
 import subprocess
 import pathlib
 import shutil
@@ -20,6 +21,14 @@ PROJE_KOKU = pathlib.Path(__file__).resolve().parent.parent
 MANIM_YOLU = shutil.which("manim") or r"C:\Users\Akif\AppData\Local\Programs\Python\Python313\Scripts\manim.exe"
 FFMPEG_YOLU = shutil.which("ffmpeg") or r"C:\Users\Akif\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-9.0-full_build\bin\ffmpeg.exe"
 FFPROBE_YOLU = shutil.which("ffprobe") or r"C:\Users\Akif\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-9.0-full_build\bin\ffprobe.exe"
+
+# Manim, video birlestirme icin kendi icinde "ffmpeg" komutunu PATH
+# uzerinden cagirir (mutlak yolumuzu bilmez). MCP sunucusunun sureci
+# PATH'te ffmpeg'i icermeyebilecegi icin, manim alt surecine ffmpeg'in
+# klasorunu PATH'e ekleyerek geciyoruz.
+_ENV = os.environ.copy()
+_ffmpeg_dizini = str(pathlib.Path(FFMPEG_YOLU).parent)
+_ENV["PATH"] = _ffmpeg_dizini + os.pathsep + _ENV.get("PATH", "")
 
 SAHNELER = PROJE_KOKU / "scenes"
 CIKTI = PROJE_KOKU / "output"
@@ -74,7 +83,7 @@ def render_manim_scene(dosya_adi: str, sinif_adi: str, konu_slug: str) -> dict:
     try:
         sonuc = subprocess.run(
             komut, capture_output=True, text=True, timeout=600,
-            stdin=subprocess.DEVNULL,
+            stdin=subprocess.DEVNULL, env=_ENV,
         )
     except subprocess.TimeoutExpired:
         return {"basarili": False, "hata": "Render 600 saniyeyi aştı - sahne çok karmaşık olabilir"}
